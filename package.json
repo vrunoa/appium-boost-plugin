@@ -1,15 +1,37 @@
 {
-  "name": "lego-boost",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "appium-boost-plugin",
+  "version": "0.0.1-beta",
+  "description": "An appium plugin to interact with Boost robot",
+  "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && mocha -t 0 ./tests/*.spec.js",
+    "lint": "eslint .",
+    "dev:setup": "./setup.sh",
+    "dev:start": "npm run build && ./launch.sh",
+    "lint:fix": "eslint . --fix",
+    "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "appium": {
+    "pluginName": "Boost",
+    "mainClass": "AppiumBoostPlugin"
+  },
+  "keywords": [
+    "appium",
+    "frida"
+  ],
+  "author": "vruno <vruno.alassia@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "appium": "^2.0.0-beta.48"
+  },
   "dependencies": {
+    "@appium/base-driver": "^9.3.1",
+    "@appium/base-plugin": "^2.2.1",
+    "@appium/support": "^3.1.5",
     "node-poweredup": "^6.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "webdriverio": "^8.3.5"
   }
 }

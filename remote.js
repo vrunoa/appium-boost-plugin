@@ -19,22 +19,27 @@ poweredUP.on("discover", async (hub) => { // Wait to discover a Hub
       }
       console.log(key);
       if (key.name === 'up') {
+          // drive
           speed = Math.abs(speed)
           motorA.setPower(speed)
           motorB.setPower(speed)
       } else if (key.name === 'down') {
+          // break
           speed = speed > 0 ? -1*speed : speed;
           motorA.brake()
           motorB.brake()
           motorA.setPower(speed)
           motorB.setPower(speed)
       } else if (key.name === 'space') {
+          // break
           motorA.brake()
           motorB.brake()
       } else if (key.name === 'left') {
+          // left
           motorB.setPower(speed)
           motorA.brake()
       } else if (key.name === 'right') {
+          // right
           motorA.setPower(speed)
           motorB.brake()
       }

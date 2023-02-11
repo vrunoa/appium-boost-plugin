@@ -1,1 +1,1 @@
-# appium-lego-boost-driver
+# appium-boost-plugin
