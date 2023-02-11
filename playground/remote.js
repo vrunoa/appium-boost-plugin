@@ -1,5 +1,5 @@
 const PoweredUP = require("node-poweredup");
-const poweredUP = new PoweredUP.PoweredUP();
+
 const readline = require('readline');
 
 
