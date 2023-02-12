@@ -164,7 +164,7 @@ describe ('plugin', function () {
       PoweredUP: function () {
         return {
           scan: mockScan,
-          on: function () {}
+          on: () => {}
         };
       }
     };
@@ -172,7 +172,7 @@ describe ('plugin', function () {
     const p = new AppiumBoostPlugin('my plugin');
     let error = null;
     try {
-      await p.boostDiscover({timeout: 150})
+      await p.boostDiscover({timeout: 150});
     } catch (err) {
       error = err;
     }
