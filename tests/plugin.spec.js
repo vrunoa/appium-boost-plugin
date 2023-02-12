@@ -1,6 +1,8 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { AppiumBoostPlugin } = require('../dist/plugin');
+const { EventEmitter } = require('node:events');
+const mockRequire = require('mock-require');
 
 describe ('plugin', function () {
   it('should set options', function () {
@@ -143,5 +145,28 @@ describe ('plugin', function () {
     const mockNext = sinon.fake();
     await p.handle(mockNext, {}, 'deleteSession');
     expect(mockDisconnect.calledOnce).to.eq(true);
+  });
+  it('should return boost on discover', async function () {
+    const hub = {
+      name: 'fake hub'
+    };
+    const mockScan = sinon.fake();
+    const fakeEmitter = new EventEmitter();
+    fakeEmitter.scan = mockScan;
+    setTimeout(function(){
+      fakeEmitter.emit('discover', hub)
+    }, 500);
+    const PoweredUp = {
+      PoweredUP: function () {
+        return fakeEmitter;
+      }
+    }
+    mockRequire('node-poweredup', PoweredUp);
+    const p = new AppiumBoostPlugin('my plugin');
+    const boost = await p.boostDiscover();
+    expect(mockScan.calledOnce).to.eq(true);
+    expect(boost).to.not.eq(null);
+    expect(boost.hub).to.not.eq(null);
+    expect(boost.hub.name).to.eq('fake hub');
   });
 });
