@@ -13,12 +13,10 @@ describe ('plugin', function () {
     const p = new AppiumBoostPlugin('my plugin');
     expect(p.boost).to.eq(null);
     const boost = {
-      connect: function () {}
-    }
+      connect () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -30,16 +28,14 @@ describe ('plugin', function () {
     const p = new AppiumBoostPlugin('my plugin');
     expect(p.boost).to.eq(null);
     const boost = {
-      connect: function () {}
-    }
+      connect () {}
+    };
     const poweredUp = {
-      stop: function () {}
-    }
+      stop () {}
+    };
     p.poweredUP = poweredUp;
     const mockConnect = sinon.stub(boost, 'connect');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     const mockStop = sinon.stub(poweredUp, 'stop');
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
@@ -52,14 +48,12 @@ describe ('plugin', function () {
   it('should call drive', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     const boost = {
-      connect: function () {},
-      drive: function () {}
-    }
+      connect () {},
+      drive () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
     const mockDrive = sinon.stub(boost, 'drive');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -70,14 +64,12 @@ describe ('plugin', function () {
   it('should call reverse', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     const boost = {
-      connect: function () {},
-      reverse: function () {}
-    }
+      connect () {},
+      reverse () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
     const mockReverse = sinon.stub(boost, 'reverse');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -88,14 +80,12 @@ describe ('plugin', function () {
   it('should call brake', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     const boost = {
-      connect: function () {},
-      brake: function () {}
-    }
+      connect () {},
+      brake () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
     const mockBrake = sinon.stub(boost, 'brake');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -106,14 +96,12 @@ describe ('plugin', function () {
   it('should call left', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     const boost = {
-      connect: function () {},
-      left: function () {}
-    }
+      connect () {},
+      left () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
     const mockLeft = sinon.stub(boost, 'left');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -124,14 +112,12 @@ describe ('plugin', function () {
   it('should call right', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     const boost = {
-      connect: function () {},
-      right: function () {}
-    }
+      connect () {},
+      right () {}
+    };
     const mockConnect = sinon.stub(boost, 'connect');
     const mockRight = sinon.stub(boost, 'right');
-    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => {
-      return boost;
-    });
+    const mockDiscover = sinon.stub(p, 'boostDiscover').callsFake(() => boost);
     await p.boostConnect();
     expect(mockDiscover.calledOnce).to.eq(true);
     expect(mockConnect.calledOnce).to.eq(true);
@@ -153,14 +139,16 @@ describe ('plugin', function () {
     const mockScan = sinon.fake();
     const fakeEmitter = new EventEmitter();
     fakeEmitter.scan = mockScan;
-    setTimeout(function(){
-      fakeEmitter.emit('discover', hub)
-    }, 500);
+    setTimeout(function () {
+      // emit fake event
+      fakeEmitter.emit('discover', hub);
+    }, 150);
     const PoweredUp = {
+      // eslint-disable-next-line
       PoweredUP: function () {
         return fakeEmitter;
       }
-    }
+    };
     mockRequire('node-poweredup', PoweredUp);
     const p = new AppiumBoostPlugin('my plugin');
     const boost = await p.boostDiscover();
