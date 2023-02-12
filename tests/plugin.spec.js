@@ -157,4 +157,26 @@ describe ('plugin', function () {
     expect(boost.hub).to.not.eq(null);
     expect(boost.hub.name).to.eq('fake hub');
   });
+  it('should reject boost on discover timeout', async function () {
+    const mockScan = sinon.fake();
+    const PoweredUp = {
+      // eslint-disable-next-line
+      PoweredUP: function () {
+        return {
+          scan: mockScan,
+          on: function () {}
+        };
+      }
+    };
+    mockRequire('node-poweredup', PoweredUp);
+    const p = new AppiumBoostPlugin('my plugin');
+    let error = null;
+    try {
+      await p.boostDiscover({timeout: 150})
+    } catch (err) {
+      error = err;
+    }
+    expect(error).to.not.eq(null);
+    expect(mockScan.calledOnce).to.eq(true);
+  });
 });
