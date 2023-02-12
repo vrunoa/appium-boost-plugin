@@ -2,20 +2,20 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { Boost } = require('../dist/boost');
 
-describe ('boost', () => {
-  it('should set default speed', () => {
+describe ('boost', function () {
+  it('should set default speed', function () {
     const b = new Boost();
     expect(b.speed).to.eq(40);
   });
-  it('should set speed from options', () => {
+  it('should set speed from options', function () {
     const b = new Boost(null, {speed: 60});
     expect(b.speed).to.eq(60);
   });
-  it('should call all methods require to setup boost robot', async () => {
+  it('should call all methods require to setup boost robot', async function () {
     const hub = {
-      connect: function() {},
-      waitForDeviceAtPort: function() {},
-    }
+      connect () {},
+      waitForDeviceAtPort () {},
+    };
     const mockConnect = sinon.stub(hub, 'connect');
     const mockWait = sinon.stub(hub, 'waitForDeviceAtPort');
     const b = new Boost(hub);
@@ -28,11 +28,11 @@ describe ('boost', () => {
     sinon.restore();
   });
 
-  it('should set motor speed to move forward', async () => {
-    const motorA = { setPower: function() {} };
-    const mockMotorA = sinon.stub(motorA, 'setPower')
-    const motorB = { setPower: function() {} };
-    const mockMotorB = sinon.stub(motorB, 'setPower')
+  it('should set motor speed to move forward', async function () {
+    const motorA = { setPower () {} };
+    const mockMotorA = sinon.stub(motorA, 'setPower');
+    const motorB = { setPower () {} };
+    const mockMotorB = sinon.stub(motorB, 'setPower');
     const b = new Boost();
     b.motorA = motorA;
     b.motorB = motorB;
@@ -43,11 +43,11 @@ describe ('boost', () => {
     expect(mockMotorB.getCall(0).args[0]).to.eq(b.speed);
     sinon.restore();
   });
-  it('should brake', async () => {
-    const motorA = { brake: function() {} };
-    const mockMotorA = sinon.stub(motorA, 'brake')
-    const motorB = { brake: function() {} };
-    const mockMotorB = sinon.stub(motorB, 'brake')
+  it('should brake', async function () {
+    const motorA = { brake () {} };
+    const mockMotorA = sinon.stub(motorA, 'brake');
+    const motorB = { brake () {} };
+    const mockMotorB = sinon.stub(motorB, 'brake');
     const b = new Boost();
     b.motorA = motorA;
     b.motorB = motorB;
@@ -55,25 +55,25 @@ describe ('boost', () => {
     expect(mockMotorA.calledOnce).to.eq(true);
     expect(mockMotorB.calledOnce).to.eq(true);
   });
-  it('should set motor speed negative to move backwards', async () => {
-    const motorA = { setPower: function() {} };
-    const mockMotorA = sinon.stub(motorA, 'setPower')
-    const motorB = { setPower: function() {} };
-    const mockMotorB = sinon.stub(motorB, 'setPower')
+  it('should set motor speed negative to move backwards', async function () {
+    const motorA = { setPower () {} };
+    const mockMotorA = sinon.stub(motorA, 'setPower');
+    const motorB = { setPower () {} };
+    const mockMotorB = sinon.stub(motorB, 'setPower');
     const b = new Boost();
     b.motorA = motorA;
     b.motorB = motorB;
     await b.reverse();
     expect(mockMotorA.calledOnce).to.eq(true);
-    expect(mockMotorA.getCall(0).args[0]).to.eq(-1* b.speed);
+    expect(mockMotorA.getCall(0).args[0]).to.eq(-1 * b.speed);
     expect(mockMotorB.calledOnce).to.eq(true);
-    expect(mockMotorB.getCall(0).args[0]).to.eq(-1* b.speed);
+    expect(mockMotorB.getCall(0).args[0]).to.eq(-1 * b.speed);
     sinon.restore();
   });
-  it('should set power to move left', async () => {
-    const motorA = { brake: function() {} };
+  it('should set power to move left', async function () {
+    const motorA = { brake () {} };
     const mockMotorA = sinon.stub(motorA, 'brake');
-    const motorB = { setPower: function() {} };
+    const motorB = { setPower () {} };
     const mockMotorB = sinon.stub(motorB, 'setPower');
     const b = new Boost();
     b.motorA = motorA;
@@ -84,10 +84,10 @@ describe ('boost', () => {
     expect(mockMotorB.getCall(0).args[0]).to.eq(b.speed);
     sinon.restore();
   });
-  it('should set power to move right', async () => {
-    const motorA = { setPower: function() {} };
+  it('should set power to move right', async function () {
+    const motorA = { setPower () {} };
     const mockMotorA = sinon.stub(motorA, 'setPower');
-    const motorB = { brake: function() {} };
+    const motorB = { brake () {} };
     const mockMotorB = sinon.stub(motorB, 'brake');
     const b = new Boost();
     b.motorA = motorA;
@@ -98,4 +98,4 @@ describe ('boost', () => {
     expect(mockMotorB.calledOnce).to.eq(true);
     sinon.restore();
   });
-})
+});
