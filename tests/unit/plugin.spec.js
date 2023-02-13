@@ -24,7 +24,7 @@ describe ('plugin', function () {
     sinon.restore();
   });
 
-  it('should discconect and remove boots', async function () {
+  it('should discconect and remove boost', async function () {
     const p = new AppiumBoostPlugin('my plugin');
     expect(p.boost).to.eq(null);
     const boost = {
