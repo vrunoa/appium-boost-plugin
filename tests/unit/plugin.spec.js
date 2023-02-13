@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { AppiumBoostPlugin } = require('../dist/plugin');
+const { AppiumBoostPlugin } = require('../../dist/plugin');
 const { EventEmitter } = require('node:events');
 const mockRequire = require('mock-require');
 

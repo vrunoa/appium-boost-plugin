@@ -4,7 +4,7 @@
   "description": "An appium plugin to interact with Boost robot",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "npm run build && nyc mocha -t 0 ./tests/*.spec.js",
+    "test": "npm run build && nyc mocha -t 0 ./tests/unit/*.spec.js",
     "lint": "eslint .",
     "dev:setup": "./setup.sh",
     "dev:start": "npm run build && ./launch.sh",

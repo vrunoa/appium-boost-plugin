@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const { Boost } = require('../dist/boost');
+const { Boost } = require('../../dist/boost');
 
 describe ('boost', function () {
   it('should set default speed', function () {
@@ -20,7 +20,6 @@ describe ('boost', function () {
     const mockWait = sinon.stub(hub, 'waitForDeviceAtPort');
     const b = new Boost(hub);
     await b.connect();
-
     expect(mockConnect.calledOnce).to.eq(true);
     expect(mockWait.calledTwice).to.eq(true);
     expect(mockWait.getCall(0).args[0]).to.eq('A');
