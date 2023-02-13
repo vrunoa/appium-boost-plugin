@@ -10,4 +10,5 @@
   await sleep(3500);
   await plugin.boostBrake();
   await plugin.boostDisconnect();
+  process.exit(0);
 })();
