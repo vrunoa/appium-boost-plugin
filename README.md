@@ -15,4 +15,4 @@ A quick playground to interact with Boost robot
 npm run playgorund:start
 ```
 
-⚠ Make sure Bluetooth is ON on your laptop
+⚠ Make sure Bluetooth is ON in your laptop
