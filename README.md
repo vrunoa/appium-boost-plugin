@@ -2,6 +2,8 @@
 
 An appium plugin to interact with Boost robot, integrating [nathankellenicki/node-poweredup](https://github.com/nathankellenicki/node-poweredup) for robot interactions.
 
+<img src="./docs/boost.gif" width="1024" />
+
 ## Requirements
 
 * Boost robot
