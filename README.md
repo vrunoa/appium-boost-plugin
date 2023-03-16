@@ -1,6 +1,6 @@
 # appium-boost-plugin
 
-An appium plugin to interact with Boost robot, integrating [nathankellenicki/node-poweredup](https://github.com/nathankellenicki/node-poweredup) for robot interactions.
+An appium plugin to interact with Boost robot
 
 <img src="./docs/boost.gif" width="1024" />
 
@@ -9,12 +9,36 @@ An appium plugin to interact with Boost robot, integrating [nathankellenicki/nod
 * Boost robot
 * Node 16.x
 
-## Playground
+## Development
+
+### Installing dependencies
+
+```sh {name=install-deps}
+npm ci
+```
+
+### Playground
 
 A quick playground to interact with Boost robot
 
-```sh
-npm run playgorund:start
+```sh {name=playground}
+npm run playground:start
 ```
 
 ⚠ Make sure Bluetooth is ON in your laptop
+
+### Testing
+
+```sh {name=unit:test}
+npm test
+```
+
+### Lint
+
+```sh {name=lint}
+npm run lint
+```
+
+### open-source
+
+* Using [nathankellenicki/node-poweredup](https://github.com/nathankellenicki/node-poweredup) for robot interactions

@@ -1,16 +1,11 @@
 #!/bin/bash
-if [[ -f .env ]]; then
-  source .env
-fi
-if [[ -z $APPIUM_SOURCE_HOME ]]; then
-  echo 'please set APPIUM_SOURCE_HOME'
-  exit 1
-fi
 PLUGIN_HOME=$(pwd)
+exists=$(npx appium@2.0.0-beta.57 plugin list --installed --json 2>/dev/null | jq '.frida!=null')
+if [[ $exists == "true" ]]; then
+  echo "uninstalling plugin"
+  npx appium@2.0.0-beta.57 plugin uninstall frida
+fi
 echo "installing plugin"
-pushd $APPIUM_SOURCE_HOME
-npm start -- plugin uninstall boost || true
-npm start -- plugin install --source local $PLUGIN_HOME
+npx appium@2.0.0-beta.57 plugin install --source local $PLUGIN_HOME
 echo "launching appium"
-npm start --prefix $APPIUM_SOURCE_HOME -- server --use-plugins=boost
-popd
+npx appium@2.0.0-beta.57 server --use-plugins=boost

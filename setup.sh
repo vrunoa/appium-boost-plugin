@@ -1,21 +1,8 @@
 #!/bin/bash
-if [[ -f .env ]]; then
-  source .env
+exists=$(npx appium@2.0.0-beta.57 driver list --installed --json 2>/dev/null | jq '.uiautomator2!=null')
+if [[ $exists != "true" ]]; then
+  echo "installing uiautomator2 driver"
+  npx appium@2.0.0-beta.57 driver install uiautomator2
 fi
-if [[ -z $APPIUM_SOURCE_HOME ]]; then
-  echo 'please set APPIUM_SOURCE_HOME'
-  exit 1
-fi
-echo "using $APPIUM_SOURCE_HOME"
-pushd $APPIUM_SOURCE_HOME
-echo "getting latest appium@2.0 changes"
-git fetch
-git co appium@2.0.0-beta.48
-git pull origin appium@2.0.0-beta.48
-echo "installing appium@2.0 dependencies"
-npm i
-echo "installing driver"
-npm start -- driver install uiautomator2 || echo 1
-popd
 echo "installing plugin dependencies"
-npm i --force
+npm ci
