@@ -17,7 +17,7 @@ jobs:
       uses: vrunoa/github-actions/runme@base-actions
 
     - name: Setup node
-      uses: ./.github/actions/node
+      uses: vrunoa/github-actions/node@base-actions
 
     - run: runme run install-deps
     - run: runme run lint
