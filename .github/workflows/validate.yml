@@ -14,10 +14,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup runme
-      uses: vrunoa/github-actions/runme@base-actions
+      uses: vrunoa/github-actions/runme@main
 
     - name: Setup node
-      uses: vrunoa/github-actions/node@base-actions
+      uses: vrunoa/github-actions/node@main
 
     - run: runme run install-deps
     - run: runme run lint
